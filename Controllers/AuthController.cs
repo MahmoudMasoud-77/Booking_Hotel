@@ -28,6 +28,21 @@ namespace Booking_Hotel.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(TokenRequestDto model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            AuthDto result = await authService.Login(model);
+            if (!result.IsAuthenticated)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
 
     }
 }
