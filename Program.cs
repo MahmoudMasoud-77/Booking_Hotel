@@ -1,5 +1,6 @@
 using Booking_Hotel.Data;
 using Booking_Hotel.Data.Services;
+using Booking_Hotel.Data.UserService;
 using Booking_Hotel.Helpers;
 using Booking_Hotel.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,6 +31,7 @@ namespace Booking_Hotel
             builder.Services.AddScoped<IRoomService, RoomService>();
             builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
             builder.Services.AddScoped<ITempGuestRoomsService, TempGuestRoomsService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
