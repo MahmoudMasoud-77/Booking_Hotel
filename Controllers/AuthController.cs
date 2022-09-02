@@ -44,5 +44,20 @@ namespace Booking_Hotel.Controllers
             return Ok(result);
         }
 
+        [HttpPost("addRole")]
+        public async Task<IActionResult> AddRole(AddRoleDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            string result = await authService.AddRole(model);
+            if (!string.IsNullOrEmpty(result))
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(model);
+        }
     }
 }
