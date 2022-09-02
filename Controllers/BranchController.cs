@@ -1,4 +1,5 @@
 ﻿using Booking_Hotel.Data.Services;
+using Booking_Hotel.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking_Hotel.Controllers
@@ -19,9 +20,12 @@ namespace Booking_Hotel.Controllers
             try
             {
                 var data = await Service.GetAllAsync();
-                
+                if (data != null)
+                {
                     return Ok(data);
-                
+                }
+                return NotFound(new StatusResponse { Message = "No data found", Status = false });
+
             }
             catch (Exception ex)
             {

@@ -33,6 +33,8 @@ namespace Booking_Hotel
             builder.Services.AddScoped<ITempGuestRoomsService, TempGuestRoomsService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
 
+            
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
