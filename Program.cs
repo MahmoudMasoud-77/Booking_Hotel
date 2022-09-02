@@ -1,4 +1,5 @@
 using Booking_Hotel.Data;
+using Booking_Hotel.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Booking_Hotel
@@ -14,6 +15,13 @@ namespace Booking_Hotel
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DB"));
             });
+
+            builder.Services.AddScoped<IBranchService, BranchService>();
+            builder.Services.AddScoped<IReservationRoomService, ReservationRoomService>();
+            builder.Services.AddScoped<IReservationService, ReservationService>();
+            builder.Services.AddScoped<IRoomService, RoomService>();
+            builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
+            builder.Services.AddScoped<ITempGuestRoomsService, TempGuestRoomsService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
