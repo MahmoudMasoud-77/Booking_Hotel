@@ -1,5 +1,4 @@
-﻿
-namespace BookingHotel.DTO
+﻿namespace Booking_Hotel.DTO
 {
     public class ReservationDto
     {

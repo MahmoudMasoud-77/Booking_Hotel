@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
-namespace BookingHotel.DTO
+namespace Booking_Hotel.DTO
 {
     public class RegisterDto
     {

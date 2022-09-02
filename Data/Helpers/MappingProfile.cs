@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Booking_Hotel.Models;
-using BookingHotel.DTO;
+using Booking_Hotel.DTO;
 
-namespace BookingHotel.Helpers
+namespace Booking_Hotel.Helpers
 {
     public class MappingProfile:Profile
     {
