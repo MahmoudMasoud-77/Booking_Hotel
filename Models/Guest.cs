@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Booking_Hotel.Models
 {
-    public class Guest
+    public class Guest: IdentityUser
     {
         [Required]
         public string Address { get; set; }

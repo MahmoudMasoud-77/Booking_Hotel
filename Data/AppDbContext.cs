@@ -21,7 +21,7 @@ namespace Booking_Hotel.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Booking_Hotel;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Booking_Hotel_2;Integrated Security=True");
             base.OnConfiguring(optionsBuilder);
         }
     }
