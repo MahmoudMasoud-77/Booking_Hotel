@@ -64,7 +64,7 @@ namespace Booking_Hotel.Controllers
                 {
                     return Ok(branch);
                 }
-                return NotFound(new StatusResponse { Message = "faild no found this branch", Status = false });
+                return NotFound(new StatusResponse { Message = "faild no found this Room", Status = false });
             }
             catch (Exception ex)
             {
@@ -81,9 +81,9 @@ namespace Booking_Hotel.Controllers
                 if (result != null)
                 {
                     await Service.DeleteAsync(id);
-                    return Ok(new StatusResponse { Message = $"Branch deleted", Status = true });
+                    return Ok(new StatusResponse { Message = $"Room deleted", Status = true });
                 }
-                return BadRequest(new StatusResponse { Message = "Not found any branch", Status = false });
+                return BadRequest(new StatusResponse { Message = "Not found any Room", Status = false });
             }
             catch (Exception ex)
             {

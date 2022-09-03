@@ -33,7 +33,7 @@ namespace Booking_Hotel.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("{id:int}", Name = "getOneRouteBranch")]
+        [HttpGet("{id:int}", Name = "GetOneBranch")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -97,7 +97,7 @@ namespace Booking_Hotel.Controllers
                     if (result != null)
                     {
                         await Service.UpdateAsync(id, model);
-                        string url = Url.Link("getOneRouteBranch", new { id = id });
+                        string url = Url.Link("GetOneBranch", new { id = id });
                         return Created(url, model);
                     }
                 }

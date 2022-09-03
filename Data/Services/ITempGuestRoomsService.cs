@@ -5,5 +5,6 @@ namespace Booking_Hotel.Data.Services
 {
     public interface ITempGuestRoomsService : IEntityBaseRepository<TempGuestRooms>
     {
+        Task<int> DeleteByGuestID(string id);
     }
 }
