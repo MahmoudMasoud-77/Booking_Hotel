@@ -1,4 +1,4 @@
-﻿namespace Booking_Hotel.Helpers
+﻿namespace Booking_Hotel.Data._JWT
 {
     public class JWT
     {

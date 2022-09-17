@@ -14,7 +14,12 @@ namespace Booking_Hotel.Data.Services
         }
         public async Task<ICollection<Room>> GetALLAvialable()
         {
-            List<Room> rooms = await context.Rooms.Where(r => r.Status == StatusRoom.Available).Include(r => r.Branch).Include(r => r.Room_Type).ToListAsync();
+            List<Room> rooms = await context.Rooms.Where(r => r.Status == StatusRoom.Available).Include(x=>x.Branch).Include(y=>y.Room_Type).ToListAsync();
+            return rooms;
+        }
+        public async Task<ICollection<Room>> GetALLBooked()
+        {
+            List<Room> rooms = await context.Rooms.Where(r => r.Status == StatusRoom.Booked).Include(x => x.Branch).Include(y => y.Room_Type).ToListAsync();
             return rooms;
         }
 

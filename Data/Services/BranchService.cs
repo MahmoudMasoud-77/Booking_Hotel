@@ -13,11 +13,10 @@ namespace Booking_Hotel.Data.Services
             context= _context;
         }
 
-        public async Task<Branch> GetOne(int id)
+        public async Task<Branch> GetByIdWithRoom(int id)
         {
             Branch branch = await context.Branches.Include(b => b.Rooms).AsSplitQuery().FirstOrDefaultAsync(b => b.Id == id);
             return branch;
         }
-        
     }
 }

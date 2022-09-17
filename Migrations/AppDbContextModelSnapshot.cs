@@ -58,10 +58,6 @@ namespace Booking_Hotel.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -131,7 +127,6 @@ namespace Booking_Hotel.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Guest_Id")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Status")
@@ -199,8 +194,9 @@ namespace Booking_Hotel.Migrations
                     b.Property<int>("RoomType_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -222,8 +218,9 @@ namespace Booking_Hotel.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeRoom")
-                        .HasColumnType("int");
+                    b.Property<string>("TypeRoom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -245,7 +242,6 @@ namespace Booking_Hotel.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GuestId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("NumberOfDays")
@@ -398,9 +394,7 @@ namespace Booking_Hotel.Migrations
                 {
                     b.HasOne("Booking_Hotel.Models.Guest", "Guest")
                         .WithMany("Reservations")
-                        .HasForeignKey("Guest_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Guest_Id");
 
                     b.Navigation("Guest");
                 });
@@ -447,9 +441,7 @@ namespace Booking_Hotel.Migrations
                 {
                     b.HasOne("Booking_Hotel.Models.Guest", "Guest")
                         .WithMany("TempGuestRooms")
-                        .HasForeignKey("GuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GuestId");
 
                     b.Navigation("Guest");
                 });

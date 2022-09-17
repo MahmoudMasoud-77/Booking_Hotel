@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Booking_Hotel.Data.Enums;
 using Booking_Hotel.Data.Base;
 
 namespace Booking_Hotel.Models
@@ -9,7 +7,9 @@ namespace Booking_Hotel.Models
     {
         public int Id { get; set; }
         public double Price { get; set; }
-        public StatusRoom Status { get; set; }
+        //public StatusRoom Status { get; set; }
+        public string Status { get; set; }
+
 
         //relation
 

@@ -6,6 +6,7 @@ namespace Booking_Hotel.Data.Services
     public interface IRoomService : IEntityBaseRepository<Room>
     {
         Task<ICollection<Room>> GetALLAvialable();
+        Task<ICollection<Room>> GetALLBooked();
         Task<ICollection<Room>> GetAllRoomByBranchId(int branchId);
     }
 }

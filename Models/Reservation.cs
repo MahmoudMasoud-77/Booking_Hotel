@@ -15,7 +15,7 @@ namespace Booking_Hotel.Models
         //Relation
 
         [ForeignKey("Guest")]
-        public string Guest_Id { get; set; }
+        public string? Guest_Id { get; set; }
         public virtual Guest Guest { get; set; }
         public virtual ICollection<ReservationRoom> ReservationRooms { get; set; }
     }

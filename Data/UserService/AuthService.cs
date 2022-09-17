@@ -1,5 +1,5 @@
 ﻿using Booking_Hotel.DTO;
-using Booking_Hotel.Helpers;
+using Booking_Hotel.Data._JWT;
 using Booking_Hotel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -14,14 +14,12 @@ namespace Booking_Hotel.Data.UserService
     {
         private readonly UserManager<Guest> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IConfiguration configuration;
         private readonly JWT jwt;
         public AuthService( UserManager<Guest> _userManager,RoleManager<IdentityRole> _roleManager,
-                            IOptions<JWT> _jwt,IConfiguration _configuration)
+                            IOptions<JWT> _jwt)
         {
             this.userManager = _userManager;
             this.roleManager = _roleManager;
-            this.configuration = _configuration;
             this.jwt = _jwt.Value;
         }
         public async Task<AuthDto> Register(RegisterDto UserDto)
@@ -39,9 +37,8 @@ namespace Booking_Hotel.Data.UserService
                 UserName = UserDto.UserName,
                 Email = UserDto.Email,
                 PasswordHash = UserDto.Password,
-                Address = UserDto.Address,
-                PhoneNumber = UserDto.Phone
             };
+
             //Hashing by Password
             IdentityResult result = await userManager.CreateAsync(user, UserDto.Password);
             if (!result.Succeeded)
@@ -53,42 +50,40 @@ namespace Booking_Hotel.Data.UserService
                 }
                 return new AuthDto { Message = errors };
             }
-            //await userManager.AddToRoleAsync(user, "User");
-
+            //Create Token
             var jwtSecurityToken = await CreateJwtToken(user);
             //cluims
             return new AuthDto
             {
                 Id = user.Id,
-                Email = user.Email,
                 ExpiresOn = jwtSecurityToken.ValidTo,
                 IsAuthenticated = true,
                 Roles = new List<string> { "User" },
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                UserName = user.UserName
             };
 
         }
-        public async Task<AuthDto> Login(TokenRequestDto model)
+        public async Task<AuthDto> Login(TokenRequestDto UserDto)
         {
+            //check -Create Token
             AuthDto authDto = new AuthDto();
 
-            Guest user = await userManager.FindByEmailAsync(model.Email);
+            Guest user = await userManager.FindByEmailAsync(UserDto.Email);
 
-            if (user is null || !await userManager.CheckPasswordAsync(user, model.Password))
+            if (user is null || !await userManager.CheckPasswordAsync(user, UserDto.Password))
             {
                 authDto.Message = "Email or Password is incorrect!";
                 return authDto;
             }
 
+            //Create Token
             var jwtSecurityToken = await CreateJwtToken(user);
+            //Get Roles
             var rolesList = await userManager.GetRolesAsync(user);
             authDto.Id = user.Id;
             authDto.IsAuthenticated = true;
             authDto.IsSuccess = true;
             authDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            authDto.Email = user.Email;
-            authDto.UserName = user.UserName;
             authDto.ExpiresOn = jwtSecurityToken.ValidTo;
             authDto.Roles = rolesList.ToList();
 

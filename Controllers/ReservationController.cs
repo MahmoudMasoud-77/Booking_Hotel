@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Booking_Hotel.Data.Services;
+using Booking_Hotel.Data;
 using Booking_Hotel.DTO;
 using Booking_Hotel.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Booking_Hotel.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class ReservationController : ControllerBase
     {
         private readonly IReservationService ReservationService;

@@ -5,7 +5,7 @@ namespace Booking_Hotel.Data.Services
 {
     public interface IBranchService:IEntityBaseRepository<Branch>
     {
-        Task <Branch> GetOne(int id);
-        
+        Task <Branch> GetByIdWithRoom(int id);
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Booking_Hotel.Data.Services;
-using Booking_Hotel.DTO;
+using Booking_Hotel.Data;
 using Booking_Hotel.Models;
 using Microsoft.AspNetCore.Mvc;
 

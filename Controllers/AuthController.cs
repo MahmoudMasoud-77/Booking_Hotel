@@ -1,6 +1,5 @@
 ﻿using Booking_Hotel.Data.UserService;
 using Booking_Hotel.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking_Hotel.Controllers
@@ -14,14 +13,14 @@ namespace Booking_Hotel.Controllers
         {
             authService = _authService;
         }
-        [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterDto model)
+        [HttpPost("register")] // api/Auth/register
+        public async Task<IActionResult> RegisterationAsync([FromBody] RegisterDto user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            AuthDto result = await authService.Register(model);
+            AuthDto result = await authService.Register(user);
             if (!result.IsAuthenticated)
             {
                 return BadRequest(result.Message);

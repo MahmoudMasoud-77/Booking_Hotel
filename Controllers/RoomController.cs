@@ -1,15 +1,14 @@
 ﻿using Booking_Hotel.Data.Services;
-using Booking_Hotel.DTO;
+using Booking_Hotel.Data;
 using Booking_Hotel.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Booking_Hotel.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class RoomController : ControllerBase
     {
         private readonly IRoomService Service;
@@ -18,6 +17,7 @@ namespace Booking_Hotel.Controllers
         {
             this.Service = _Service;
         }
+
         [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -38,11 +38,28 @@ namespace Booking_Hotel.Controllers
             }
         }
         [HttpGet("GetAllAvialable")]
-        public IActionResult GetAllAvialable()
+        public async Task<IActionResult> GetAllAvialable()
         {
             try
             {
-                var data = Service.GetALLAvialable();
+                var data =await Service.GetALLAvialable();
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                return NotFound(new StatusResponse { Message = "No data found", Status = false });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetAllBooked")]
+        public async Task<IActionResult> GetAllBooked()
+        {
+            try
+            {
+                var data = await Service.GetALLBooked();
                 if (data != null)
                 {
                     return Ok(data);

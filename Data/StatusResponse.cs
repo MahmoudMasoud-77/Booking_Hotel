@@ -1,4 +1,4 @@
-﻿namespace Booking_Hotel.DTO
+﻿namespace Booking_Hotel.Data
 {
     public class StatusResponse
     {
